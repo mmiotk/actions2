@@ -1,0 +1,26 @@
+name: env-vars
+on:
+  push:
+    branches: [main]
+
+env:
+  GLOBAL_LEVEL: "workflow"
+  SHARED_VAR: "from-workflow"
+
+jobs:
+  show-env:
+    runs-on: ubuntu-latest
+    env:
+      JOB_LEVEL: "job"
+      SHARED_VAR: "from-job"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show env levels
+        env: 
+          STEP_LEVEL: "step"
+          SHARED_VAR: "from-step"
+        run: | 
+          echo "$GLOBAL_LEVEL"
+          echo "$JOB_LEVEL"
+          echo "$STEP_LEVEL"
+          echo "$SHARED_VAR"
