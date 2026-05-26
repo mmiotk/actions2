@@ -16,8 +16,8 @@ jobs:
       - name: Run unit tests with reports
         run: | 
           cd app
-          pytest tests/test_unit.py \ 
-          --cov=calc --cov-fail-under=80 \ 
+          pytest tests/test_unit.py \
+          --cov=calc --cov-fail-under=80 \
           --cov-report=xml \
           --junitxml=junit.xml
 
