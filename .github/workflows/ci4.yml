@@ -1,0 +1,22 @@
+name: artifacts
+on: 
+  push: 
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@5
+        with: 
+          python-version: '3.12'
+
+      - run: pip install --quiet -r app/requirements.txt
+      - name: Run unit tests with reports
+        run: | 
+          cd app
+          pytest tests/test_unit.py \ 
+          --cov=calc --cov-fail-under=80 \ 
+          --cov-report=xml \
+          --junitxml=junit.xml
