@@ -32,6 +32,9 @@ jobs:
         run: |
           echo "$POSTGRES_USER"
           echo "$POSTGRES_DB"
+          echo "${{vars.POSTGRES_USER}}"
+          echo "${{vars.POSTGRES_DB}}"
       - name: Show secrets
         run: | 
           echo "$POSTGRES_PASSWORD"
+          echo "${{secrets.POSTGRES_PASSWORD}}"
