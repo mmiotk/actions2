@@ -24,3 +24,6 @@ jobs:
           echo "$JOB_LEVEL"
           echo "$STEP_LEVEL"
           echo "$SHARED_VAR"
+          echo "$GITHUB_SHA"
+          echo "$GITHUB_ACTOR"
+          echo "$RUNNER_OS"
