@@ -1,0 +1,37 @@
+name: variables-vs-secrets
+on:
+  push:
+    branches: [main]
+
+
+jobs:
+  use-vars-and-secrets:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: ${{vars.POSTGRES_USER}}
+          POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
+          POSTGRES_DB: ${{vars.POSTGRES_DB}}
+        ports:
+          "5432:5432"
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s  
+          --health-timeout 3s  
+          --health-retries 5  
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: 
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install --quiet -r app/requirements.txt
+      - name: Show variables
+        run: |
+          echo "$POSTGRES_USER"
+          echo "$POSTGRES_DB"
+      - name: Show secrets
+        run: | 
+          echo "$POSTGRES_PASSWORD"
