@@ -1,36 +1,36 @@
-name: env-vars
-on:
-  push:
-    branches: [main]
+# name: env-vars
+# on:
+#   push:
+#     branches: [main]
 
-env:
-  GLOBAL_LEVEL: "workflow"
-  SHARED_VAR: "from-workflow"
+# env:
+#   GLOBAL_LEVEL: "workflow"
+#   SHARED_VAR: "from-workflow"
 
-jobs:
-  show-env:
-    runs-on: ubuntu-latest
-    env:
-      JOB_LEVEL: "job"
-      SHARED_VAR: "from-job"
-    steps:
-      - uses: actions/checkout@v4
-      - name: Show env levels
-        env: 
-          STEP_LEVEL: "step"
-          SHARED_VAR: "from-step"
-        run: | 
-          echo "$GLOBAL_LEVEL"
-          echo "$JOB_LEVEL"
-          echo "$STEP_LEVEL"
-          echo "$SHARED_VAR"
-          echo "$GITHUB_SHA"
-          echo "$GITHUB_ACTOR"
-          echo "$RUNNER_OS"
+# jobs:
+#   show-env:
+#     runs-on: ubuntu-latest
+#     env:
+#       JOB_LEVEL: "job"
+#       SHARED_VAR: "from-job"
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Show env levels
+#         env: 
+#           STEP_LEVEL: "step"
+#           SHARED_VAR: "from-step"
+#         run: | 
+#           echo "$GLOBAL_LEVEL"
+#           echo "$JOB_LEVEL"
+#           echo "$STEP_LEVEL"
+#           echo "$SHARED_VAR"
+#           echo "$GITHUB_SHA"
+#           echo "$GITHUB_ACTOR"
+#           echo "$RUNNER_OS"
       
-      - name: env evaluation
-        env: 
-          GREETING: "hello"
-        run: | 
-            echo "${{env.GREETING}}"
-            echo "$GREETING"
+#       - name: env evaluation
+#         env: 
+#           GREETING: "hello"
+#         run: | 
+#             echo "${{env.GREETING}}"
+#             echo "$GREETING"
