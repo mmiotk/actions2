@@ -27,9 +27,10 @@ jobs:
           echo "$GITHUB_SHA"
           echo "$GITHUB_ACTOR"
           echo "$RUNNER_OS"
+      
       - name: env evaluation
         env: 
           GREETING: "hello"
-          run: | 
-            echo ${{env.GREETING}}
-            echo $GREETING
+        run: | 
+            echo "${{env.GREETING}}"
+            echo "$GREETING"
