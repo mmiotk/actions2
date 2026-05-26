@@ -20,3 +20,23 @@ jobs:
           --cov=calc --cov-fail-under=80 \ 
           --cov-report=xml \
           --junitxml=junit.xml
+
+      - name: Uploud test reports
+        if: always()
+        uses: actions/uploud-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            app/junit.xml
+            app/coverage.xml
+          retention-days: 14
+
+  report: 
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with: 
+          name: test-reports
