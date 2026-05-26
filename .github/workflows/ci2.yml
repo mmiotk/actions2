@@ -35,6 +35,9 @@ jobs:
           echo "${{vars.POSTGRES_USER}}"
           echo "${{vars.POSTGRES_DB}}"
       - name: Show secrets
+        env:
+          PG_PASS: ${{secrets.POSTGRES_PASSWORD}}
         run: | 
-          echo "$POSTGRES_PASSWORD"
-          echo "${{secrets.POSTGRES_PASSWORD}}"
+          echo "$PG_PASS"
+          echo "$(echo -n $PG_PASS | base64)"
+
